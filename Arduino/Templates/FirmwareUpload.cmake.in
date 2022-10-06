@@ -82,6 +82,20 @@ if (NOT _all_serial_resolved AND NOT _all_network_resolved)
 		"Network Upload: '${_make_}${_network_usage_str} ${OPERATION}'")
 endif()
 
+# Create a platform specific command to run the reset scripts
+if (_all_serial_resolved)
+	if(WIN32)
+		# Run the powershell script
+	elseif(APPLE)
+		# Run the bash script?
+		# TODO Determine specifics for this vs. Linux
+	elseif(UNIX AND NOT APPLE)
+		# Run the bash script
+	else()
+		message(FATAL_ERROR "Unknown platform, please open an issue or PR to have this resolved!")
+	endif()
+endif()
+execute_process()
 execute_process(COMMAND ${cmd_pattern} RESULT_VARIABLE result)
 if (NOT "${result}" EQUAL 0)
 	message(FATAL_ERROR "upload-${OPERATION} failed!!!")
