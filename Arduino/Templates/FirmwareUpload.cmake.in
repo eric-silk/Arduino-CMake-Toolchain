@@ -3,6 +3,8 @@
 set(ARDUINO_TOOLCHAIN_DIR "@ARDUINO_TOOLCHAIN_DIR@")
 include("${ARDUINO_TOOLCHAIN_DIR}/Arduino/Utilities/PropertiesReader.cmake")
 
+# TODO update this/make a new function that gets the serial port name as a variable
+# rather than stuffing it into a pre-formed string
 function(_get_usage_str req_var_list opt_var_list ret_usage_str)
 	set(_ret_usage_str)
 	foreach(var_name IN LISTS req_var_list)
@@ -86,11 +88,18 @@ endif()
 if (_all_serial_resolved)
 	if(WIN32)
 		# Run the powershell script
+		message(STATUS "_req_var_list: ${_req_var_list}")
+		message(STATUS "${serial.port.file}")
+		set(da_command "${CMAKE_SOURCE_DIR}/util/arduino_reset.ps1 ${serial.port.file}")
+		message(STATUS "da command: ${da_command}")
+		execute_process(COMMAND da_command)
 	elseif(APPLE)
 		# Run the bash script?
 		# TODO Determine specifics for this vs. Linux
+		message(FATAL_ERROR "Apple platforms not yet supported!")
 	elseif(UNIX AND NOT APPLE)
 		# Run the bash script
+		message(FATAL_ERROR "Linux platforms not yet supported!")
 	else()
 		message(FATAL_ERROR "Unknown platform, please open an issue or PR to have this resolved!")
 	endif()
