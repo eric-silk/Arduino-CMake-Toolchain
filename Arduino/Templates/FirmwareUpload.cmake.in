@@ -118,7 +118,7 @@ endif()
 
 if ($ENV{OPEN_PUTTY})
 	# TODO make the baud rate configurable via env var (and propogate to source code as well)
-	execute_process(COMMAND powershell Start-Process putty.exe -ArgumentList "\"-serial $ENV{SERIAL_PORT} -sercfg 38400,8,n,1,N\"" RESULT_VARIABLE result)
+	execute_process(COMMAND powershell Invoke-Command 'Start-Process putty.exe -ArgumentList "\"-serial $ENV{SERIAL_PORT} -sercfg 38400,8,n,1,N\""' RESULT_VARIABLE result)
 	if (NOT "${result}" EQUAL 0)
 		message(WARNING "Failed to launch putty on $ENV{SERIAL_PORT}, you may need to open it yourself.")
 		message(WARNING "${result}")
