@@ -6,6 +6,9 @@ if (NOT ARDUINO_BOARD_IDENTIFIER)
 		"2. From the generated BoardOptions.cmake at ${CMAKE_BINARY_DIR}/BoardOptions.cmake\n"
 		"3. Use yor own preset BoardOptions.cmake -DARDUINO_BOARD_OPTIONS_FILE=<file>\n"
 		"4. Use -DARDUINO_BOARD=<board_id> and -DARDUINO_<BOARD_ID>_MENU_<MENU_ID>_<MENU_OPT_ID>=<TRUE/FALSE>!!!\n"
+		"============================================================================================\n"
+		"5. If you are using an Arduino Due: BE SURE TO INSTALL THE SAM CORE VIA THE IDE:\n\thttps://docs.arduino.cc/software/ide-v1/tutorials/getting-started/cores/arduino-sam\n"
+		"============================================================================================\n"
 	)
 endif()
 
